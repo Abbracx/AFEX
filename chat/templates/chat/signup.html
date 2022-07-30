@@ -1,0 +1,28 @@
+{% extends "chat/base.html" %}
+
+{% block content %}
+    <div>
+        <h1>Sign up</h1>
+    </div>
+    <form action="{% url 'signup' %}" id="signupform" method="POST">
+        {% csrf_token %}
+        
+        {{form}}
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                <div>
+                    <p>{{ error|escape }}</p>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        <button type = "submit" id = "submit">Submit</button>
+    </form>
+
+    <div>
+        <small>
+            Already Have An Account? <a href="{% url 'signIn' %}">Sign In</a>
+        </small>
+    </div>
+{% endblock %}
